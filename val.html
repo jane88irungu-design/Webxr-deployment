@@ -1,0 +1,56 @@
+<script>
+    let name = "";
+    let questionIndex = 0;
+    let accepted = true;
+
+    const questions = [
+        "Will you be my Valentine? 💘",
+        "Do you feel something special between us? 💕",
+        "Would you like to continue this journey with me? 🌹"
+    ];
+
+    function saveName() {
+        name = document.getElementById("nameInput").value;
+        if (name === "") return alert("Please enter your name 💕");
+
+        document.getElementById("nameSection").classList.add("hidden");
+        document.getElementById("questionSection").classList.remove("hidden");
+        document.getElementById("question").innerHTML = name + ", " + questions[questionIndex];
+    }
+
+    function yesClicked() {
+        questionIndex++;
+        if (questionIndex < questions.length) {
+            document.getElementById("question").innerHTML =
+                name + ", " + questions[questionIndex];
+            document.getElementById("message").innerHTML = "💖";
+        } else {
+            showFinal(true);
+        }
+    }
+
+    function noClicked() {
+        accepted = false;
+        showFinal(false);
+    }
+
+    function showFinal(result) {
+        document.getElementById("questionSection").classList.add("hidden");
+        document.getElementById("finalSection").classList.remove("hidden");
+
+        if (result) {
+            document.getElementById("finalMessage").innerHTML =
+                name + ", thank you for choosing me 💖🥹 Happy Valentine’s Day!";
+        } else {
+            document.getElementById("finalMessage").innerHTML =
+                name + ", thank you for your honesty 💐 I respect your feelings always.";
+        }
+    }
+
+    function shareWhatsApp() {
+        const text = encodeURIComponent(
+            "I just answered your Valentine questions 💕"
+        );
+        window.open("https://wa.me/?text=" + text, "_blank");
+    }
+</script>
